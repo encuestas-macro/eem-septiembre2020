@@ -1,0 +1,257 @@
+---
+css: style.css
+pagetitle: "EEM Septiembre 2020"
+output:
+  html_document: default
+---
+<!---
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+-->
+
+```{r config, include=FALSE}
+library(dplyr)
+library(forcats)
+library(ggplot2)
+
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE)
+load(here::here("data", "eem", "eem_ws"))
+```
+
+
+<!-- Header del documento -->
+<div class = "header">
+
+  <div class="imagen">
+  <img src="img/bcrd_squared.png" alt="drawing"/>
+  </div>
+  
+  <div class="title">
+  <h2>Banco Central de la República Dominicana<br>
+Encuesta de Expectativas Macroeconómicas</h2>
+<span>Septiembre 2020</span>
+  </div>
+  
+</div>
+<hr class="head-ruler">
+
+
+<!-- Inflación -->
+
+### Inflación
+***
+
+<div class="inflacion-container">
+<!-- Redancción -->
+<div class="left first">
+
+En el mes de septiembre los analistas esperan que la inflación para el cierre de 2020 sea 4.25%, ubicándose este mes por encima del centro del rango de meta de 4% +/- 1% establecido en el programa monetario. Este resultado consolida el repunte de las expectativas de inflación para el año actual, influenciadas principalmente por la evolución reciente de los precios.
+
+</div>
+
+<div class="right first">
+#### Expectativas de inflación para el año 2020
+```{r plt_inflacion_diciembre, fig.width=5.5, fig.height=3.8}
+plt_boxplot_inflacion_diciembre2020
+```
+</div>
+
+<div class="left secondl">
+
+Por otro lado, para los horizontes de 12 y 24 meses, la mediana de las expectativas de inflación se colocan en 3.30% y 4.32%, respectivamente.
+
+El hecho de que las expectativas se mantengan ancladas a la meta de inflación en horizontes de más largo plazo denota confianza en la estabilidad de precios, a pesar del choque que afronta el país por la pandemia y el visible incremento en la dispersión de los pronósticos.
+</div>
+
+<div class="right second">
+
+#### Inflación observada, mediana de las expectativas de inflación interanual e intervalo de probabilidad D2-D8 
+```{r ptl_desviacion_inflacion, fig.width=5.5, fig.height=3.8}
+ptl_evolucion_mediana_inflacion %>% 
+  plotly::config(displayModeBar = F, responsive = TRUE)
+```
+
+</div>
+</div>
+
+### Tipo de cambio
+***
+
+<div class="tc-container">
+
+<div class="left first">
+
+Los analistas esperan que el tipo de cambio cierre el 2020 al RD$59.7 por cada dólar, para una depreciación implícita interanual promedio de 12.4%.
+
+De igual forma, para el final del 2021 y a septiembre del 2022 el promedio de la depreciación interanual esperada rondaría el 5.0%, al colocar sus expectativas en 6.1% y 4.5%, respectivamente.  Estos resultados se encuentran en línea con el promedio histórico de la depreciación interanual.
+</div>
+
+<div class="right first">
+#### Depreciación implícita del tipo de cambio
+```{r plt_depreciacion, fig.width=5.5, fig.height=3.8}
+plt_depreciacion %>% 
+  plotly::config(displayModeBar = F) 
+```
+</div>
+
+<div class="left second" style="position: relative; bottom: 15px;">
+
+Incluso para el horizonte más largo de 24 meses, los analistas de la EEM suelen registrar errores de pronóstico bajos para el tipo de cambio, dada la estabilidad relativa del esta variable. Sin embargo, con la depreciación observada recientemente, los errores se han incrementado y se observa un cambio de nivel importante en las expectativas a 12 y 24 meses, el cual se fortaleció ligeramente en este último levantamiento.
+
+</div>
+
+<div class="right second">
+#### Evolución de las expecativas de tipo de cambio
+
+```{r plt_expectativas_tc, fig.width=5.5, fig.height=3.8}
+plt_expectativas_tc %>% 
+  plotly::config(displayModeBar = FALSE)
+```
+
+</div>
+</div>
+
+
+### Crecimiento del PIB
+***
+<div class="pib-container">
+<div class="left">
+
+En cuanto al crecimiento del PIB, las expectativas para 2020 muestran un deterioro por sexto mes consecutivo. En efecto, en la medición de septiembre la mediana de las expectativas se colocó en -4.8%, con un mínimo de -9.0% y un máximo de 0.0%.  Los pronósticos de las expectativas de crecimiento registraron, inicialmente, un marcado incremento en su dispersión y, a pesar de una reducción reciente de la misma, esta se mantiene por encima de los niveles previos a la pandemia.
+
+La mediana de las expectativas de crecimiento para el 2021 pasó de 5.1% en enero del 2020 a 4.1% en septiembre, mostrando valores extremos que van desde -1.0% a 6.1%.
+
+</div>
+
+<div class="right">
+#### Evolución de las expectativas de crecimiento 2020
+```{r crecimiento_2020, fig.width=5.5, fig.height=3.8}
+plt_crecimiento_2020
+```
+
+#### Evolución de las expectativas de crecimiento 2021
+```{r crecimiento_2021, fig.width=5.5, fig.height=3.8}
+plt_crecimiento_2021
+```
+</div>
+</div>
+
+### Tasa de Política Monetaria (TPM)
+***
+
+<div class="pib-container">
+<div class="left">
+
+Para la Tasa de Política Monetaria, los analistas reflejan la percepción de que no serán necesarios estímulos monetarios adicionales por parte del Banco Central a través del canal de tasas de interés. Asimismo, los agentes participantes de la encuesta esperan que la TPM se mantenga cerca de su nivel actual, con una mediana de 3.0% tanto para el cierre del trimestre actual como para final de año.
+
+En los horizontes de 12 y 24 meses las expectativas se distribuyen alrededor de una mediana de 4.0%, mostrando una dispersión mucho mayor que en horizontes más cercanos.
+
+
+</div>
+
+<div class="right">
+#### Distribución acumulada de las expectativas para la TPM
+```{r}
+densidad_tpm +
+  theme(
+    axis.title = element_text(size = 13, face = "bold"),
+    axis.text = element_text(size = 13),
+    legend.text = element_text(size = 11)
+    )
+```
+
+</div>
+</div>
+
+### Efectos del COVID-19
+***
+
+<div class="covid-container">
+
+Ante el choque generado por la pandemia del COVID-19, en las últimas ediciones de la EEM se han incluido preguntas que buscan captar las expectativas de los analistas respecto a la desviación de variables macroeconómicas importantes. Se pregunta a los participantes sobre la dirección y el tiempo estimado de recuperación de las variables a
+sus niveles promedio. En general, los colaboradores de la encuesta esperan desviaciones coherentes con episodios de desaceleración económica.
+
+De manera específica, la llegada mensual de turistas, el desempleo, la inversión y los ingresos fiscales resaltan por ser las variables que más tardarían en retornar a sus niveles previos a la pandemia.
+
+Otro resultado que sobresale es que el tiempo de estabilización de las variables del sector financiero aumentó, indicando que la liquidez del sistema y los prestamos otorgados a las empresas y hogares estarán por encima de su nivel previo a la pandemia por más tiempo del previsto anteriormente. También en el caso de las tasas de interés, la cuales estarían por debajo.
+
+Sobre otros sectores, la variable que se espera que se estabilice en menos tiempo es el influjo de remesas, estando por los próximos 3 meses por encima de sus niveles previos.
+
+</div>
+
+<h4 class="covid-dt">Expectativas: duración y dirección de los desequilibrios provocados por la pandemia, según sector</h4>
+
+<div class = "button-row"  align="center">
+<div class = "btn btn-secondary" id="real"> Real </div>
+<div class = "btn btn-secondary" id="financiero"> Financiero </div>
+<div class = "btn btn-secondary" id="externo"> Externo </div>
+<div class = "btn btn-secondary" id="fiscal"> Fiscal </div>
+</div>
+
+<img id = "covid_sector" src="https://raw.githubusercontent.com/encuestas-macro/eem-septiembre2020/master/recuperacion_real.png">
+
+</div>
+
+
+<script>
+let realButton = document.getElementById("real");
+let financieroButton = document.getElementById("financiero");
+let externoButton = document.getElementById("externo");
+let fiscalButton = document.getElementById("fiscal");
+let graficoSector = document.getElementById("covid_sector");
+
+let realPath = "https://raw.githubusercontent.com/encuestas-macro/eem-septiembre2020/master/recuperacion_real.png";
+let financieroPath = "https://raw.githubusercontent.com/encuestas-macro/eem-septiembre2020/master/recuperacion_financiero.png";
+let externoPath = "https://raw.githubusercontent.com/encuestas-macro/eem-septiembre2020/master/recuperacion_externo.png";
+let fiscalPath = "https://raw.githubusercontent.com/encuestas-macro/eem-septiembre2020/master/recuperacion_fiscal.png"
+
+realButton.onclick = () => {
+graficoSector.src = realPath;
+realButton.style.backgroundColor = "#7f5d00";
+financieroButton.style.backgroundColor = "grey";
+externoButton.style.backgroundColor = "grey";
+fiscalButton.style.backgroundColor = "grey";
+}
+
+financieroButton.onclick = () => {
+graficoSector.src = financieroPath;
+realButton.style.backgroundColor = "grey";
+financieroButton.style.backgroundColor = "#7f5d00";
+externoButton.style.backgroundColor = "grey";
+fiscalButton.style.backgroundColor = "grey";
+}
+
+externoButton.onclick = () => {
+graficoSector.src = externoPath;
+realButton.style.backgroundColor = "grey";
+financieroButton.style.backgroundColor = "grey";
+externoButton.style.backgroundColor = "#7f5d00";
+fiscalButton.style.backgroundColor = "grey";
+}
+
+fiscalButton.onclick = () => {
+graficoSector.src = fiscalPath;
+realButton.style.backgroundColor = "grey";
+financieroButton.style.backgroundColor = "grey";
+externoButton.style.backgroundColor = "grey";
+fiscalButton.style.backgroundColor = "#7f5d00";
+graficosSector.height
+}
+
+realButton.style.backgroundColor = "#7f5d00"
+
+</script>
+
+
+
+
+<!--
+
+<div class="footer text-center">
+<h3>Departamento de Programación Monetaria y Estudios Económicos</h3>
+<h4>División de Encuestas Macroeconómicas</h4>
+-->
+
+
+
+
